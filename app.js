@@ -48,7 +48,9 @@ var User = mongoose.model('users', userSchema);
 
 // var app = express.createServer();
 var app = express();
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({
+  
+}));
 
 
 app.set('port', process.env.PORT || 3000);
@@ -62,19 +64,19 @@ app.get('/questions', function(req, res){
    res.send(questions);
 
    ////////////// show questions from mongoDB
-   questions.find()
-    .exec(function(err, questions){
-      if (err){
-        res.status(500).json({status: 'failure'});
-      } else {
-        // res.render('questions', {
-        //   text: questions.text,
-        //   comments: questions.comments
-        // });
-        //res.send(success: true);
-      }
-    });
-    res.send(questions);
+   // questions.find()
+   //  .exec(function(err, questions){
+   //    if (err){
+   //      res.status(500).json({status: 'failure'});
+   //    } else {
+   //      // res.render('questions', {
+   //      //   text: questions.text,
+   //      //   comments: questions.comments
+   //      // });
+   //      //res.send(success: true);
+   //    }
+   //  });
+   //  res.send(questions);
 
 });
 
