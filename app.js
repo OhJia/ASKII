@@ -22,9 +22,9 @@ var qText, qLoc, qYes, qNo, qComm;
 var questionSchema = mongoose.Schema({
   text: String,
   location: String,
-  yes: int,
-  no: int, 
-  comments: int  
+  yes: Number,
+  no: Number, 
+  comments: Number  
 });
 
 var Question = mongoose.model('questions', questionSchema); // questions doesn't matter, just collection name in mongo
@@ -85,13 +85,13 @@ app.post('/new-question', function(req, res){
   qNo = req.body.no;
   qComm = req.body.comments;
   
-  var q = new Question(
-    questions[text] = qText;
-    questions[location]= qLoc;
-    questions[yes] = qYes;
-    questions[no] = qNo;
-    questions[comments] = qComm;
-  );
+  var q = new Question({
+    text: qText,
+    location: qLoc,
+    yes: qYes,
+    no: qNo,
+    comments: qComm
+  });
 
   q.save(function(err){
     console.log(err);
