@@ -71,7 +71,7 @@ app.get('/questions', function(req, res){
         //   text: questions.text,
         //   comments: questions.comments
         // });
-        res.send(success: true);
+        //res.send(success: true);
       }
     });
     res.send(questions);
