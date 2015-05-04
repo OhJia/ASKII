@@ -1,0 +1,16 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "ejs": "0.7.2",
+    "express": "3.4.8",
+    "jade": "*",
+    "mongo": "^0.1.0",
+    "mongodb-uri": "^0.9.7",
+    "mongoose": "^4.0.2"
+  }
+}
