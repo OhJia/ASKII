@@ -49,7 +49,7 @@ var User = mongoose.model('users', userSchema);
 // var app = express.createServer();
 var app = express();
 app.use(bodyParser.urlencoded({
-  
+
 }));
 
 
@@ -97,6 +97,7 @@ app.post('/new-question', function(req, res){
 
   q.save(function(err){
     console.log(err);
+    res.send(q);
   });
 });
 
