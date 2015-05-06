@@ -140,10 +140,15 @@ app.post('/single-question/new-comment', function(req, res){
   //   function (err, numAffected) {}
   // );
 
-  Question.findAndModify({
-    query: { '_id': nQID },
-    update: { $inc: { comments: 1 } },
-    //new: true
+  // Question.findAndModify({
+  //   query: { '_id': nQID },
+  //   update: { $inc: { comments: 1 } },
+  //   //new: true
+  // });
+
+  Question.findByIdAndUpdate(nQID, { $inc: { comments: 1 }}, function (err, question) {
+  if (err) return handleError(err);
+  res.send(question.comments); // 3
   });
       
   c.save(function(err){
