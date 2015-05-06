@@ -121,31 +121,7 @@ app.post('/single-question/new-comment', function(req, res){
     q_id: nQID,
   });
 
-  // get question, find the comments.
   // comments + 1
-  // Question.find({'_id':nQID}, 'comments', function(err, question){
-  //   if(err) return handleError(err);
-
-  //   Question.update(
-  //     { '_id': nQID }, 
-  //     { 'comments':  question.comments + 1},
-  //     function (err, numAffected) {}
-  //   );
-      
-  //  });
-
-  // Question.update(
-  //   { '_id': nQID }, 
-  //   { 'comments':  commentsCount(nQID)},
-  //   function (err, numAffected) {}
-  // );
-
-  // Question.findAndModify({
-  //   query: { '_id': nQID },
-  //   update: { $inc: { comments: 1 } },
-  //   //new: true
-  // });
-
   Question.findByIdAndUpdate(nQID, { $inc: { comments: 1 }}, function (err, question) {
   if (err) return handleError(err);
   question.save(question.comments); // 3
