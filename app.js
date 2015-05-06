@@ -55,7 +55,7 @@ app.use(bodyParser.urlencoded({
 
 app.set('port', process.env.PORT || 3000);
 
-// app.get('/questions', function(req, res){
+app.get('/questions', function(req, res){
 //    var questions = [
 //      {id: 1, title: 'What is up?'},
 //      {id: 2, title: 'Is it fun?'},
@@ -63,25 +63,10 @@ app.set('port', process.env.PORT || 3000);
 //    ];
 //    res.send(questions);
 
-   Question.findOne('text', function (err, question) {
-      if (err) return handleError(err);
-      console.log('%s %s is a %s.', question.text, question.yes, question.no) // Space Ghost is a talk show host.
-    });
-
-   ////////////// show questions from mongoDB
-   // questions.find()
-   //  .exec(function(err, questions){
-   //    if (err){
-   //      res.status(500).json({status: 'failure'});
-   //    } else {
-   //      // res.render('questions', {
-   //      //   text: questions.text,
-   //      //   comments: questions.comments
-   //      // });
-   //      //res.send(success: true);
-   //    }
-   //  });
-   //  res.send(questions);
+   Question.find({}, 'text yes no', function(err, questions){
+      if(err) return handleError(err);
+      res.send(questions);
+   });
 
 });
 
