@@ -31,7 +31,8 @@ var Question = mongoose.model('questions', questionSchema); // questions doesn't
 
 // COMMENT COLLECTION
 var commentSchema = mongoose.Schema({
-
+  q_id: String,
+  comment: String
 });
 
 var Comment = mongoose.model('comments', commentSchema);
@@ -103,6 +104,21 @@ app.post('/new-question', function(req, res){
   q.save(function(err){
     console.log(err);
     res.send(q);
+  });
+});
+
+app.post('/single-question/new-comment', function(req, res){
+  nComm = req.body.comment;
+  nQID = req.body.q_id;
+  
+  var c = new Comment({
+    comment: nComm,
+    q_id: nQID,
+  });
+
+  c.save(function(err){
+    console.log(err);
+    res.send(c);
   });
 });
 
