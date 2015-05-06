@@ -139,6 +139,12 @@ app.post('/single-question/new-comment', function(req, res){
     { 'comments':  commentsCount(nQID)},
     function (err, numAffected) {}
   );
+
+  Question.findAndModify({
+    query: { _id: nQID },
+    update: { $inc: { comments: 1 } },
+    new: true
+  });
       
   c.save(function(err){
     console.log(err);
@@ -156,17 +162,17 @@ app.get('/single-question/comments', function(req, res){
 
 });
 
-function commentsCount(_id) {
-   var ret = db.counters.findAndModify(
-          {
-            query: { _id: _id },
-            update: { $inc: { seq: 1 } },
-            new: true
-          }
-   );
+// function commentsCount(_id) {
+//    var ret = db.counters.findAndModify(
+//           {
+//             query: { _id: _id },
+//             update: { $inc: { seq: 1 } },
+//             new: true
+//           }
+//    );
 
-   return ret.seq;
-}
+//    return ret.seq;
+// }
 
 
 app.get('/*', function(req, res) {
