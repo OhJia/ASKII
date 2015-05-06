@@ -134,14 +134,6 @@ app.post('/single-question/new-comment', function(req, res){
       
    });
 
-  Question.find({'_id':nQID}, 'comments', function(err, question){
-    if(err) return handleError(err);
-  }).update(
-      { '_id': nQID }, 
-      { $set: { 
-          '$.comments':  question.comments + 1
-      }}, function (err, numAffected) {}
-    );
       
   c.save(function(err){
     console.log(err);
