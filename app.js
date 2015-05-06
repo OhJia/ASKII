@@ -148,7 +148,7 @@ app.post('/single-question/new-comment', function(req, res){
 
   Question.findByIdAndUpdate(nQID, { $inc: { comments: 1 }}, function (err, question) {
   if (err) return handleError(err);
-  res.send(question.comments); // 3
+  question.save(question.comments); // 3
   });
       
   c.save(function(err){
