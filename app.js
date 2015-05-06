@@ -56,6 +56,8 @@ app.use(bodyParser.urlencoded({
 
 app.set('port', process.env.PORT || 3000);
 
+//***************** QUESTION STUFF ***************************//
+
 app.get('/questions', function(req, res){
 //    var questions = [
 //      {id: 1, title: 'What is up?'},
@@ -107,6 +109,8 @@ app.post('/new-question', function(req, res){
   });
 });
 
+//***************** COMMENT STUFF ***************************//
+
 app.post('/single-question/new-comment', function(req, res){
   nComm = req.body.comment;
   nQID = req.body.q_id;
@@ -122,20 +126,15 @@ app.post('/single-question/new-comment', function(req, res){
   });
 });
 
-// app.get('/', function(req, res){
-//   res.render('index.ejs', {title: 'Clever Kitchens'});
-// });
+app.get('/single-question/comments', function(req, res){
 
-// app.get('/recipes', function(req, res){
-//   res.render('layout.ejs', {
-//     title: 'Clever Kitchens - Recipes', 
-//     body: '<h1>All Recipes</h1>'
-//   });
-// });
+   Comment.find({'q_id': req.query.q_id}, 'comment', function(err, comments){
+      if(err) return handleError(err);
+      res.send(comments);
+   });
 
-// app.get('/recipes/:title', function(req, res) {
-//  res.send('<h1>' + req.params.title + '</h1>');
-// });
+});
+
 
 app.get('/*', function(req, res) {
   res.status(404).render('error.ejs', {title: 'Error'});
