@@ -123,17 +123,22 @@ app.post('/single-question/new-comment', function(req, res){
 
   // get question, find the comments.
   // comments + 1
-  Question.find({'_id':nQID}, 'comments', function(err, question){
-    if(err) return handleError(err);
+  // Question.find({'_id':nQID}, 'comments', function(err, question){
+  //   if(err) return handleError(err);
 
-    Question.update(
-      { '_id': nQID }, 
-      { 'comments':  question.comments + 1},
-      function (err, numAffected) {}
-    );
+  //   Question.update(
+  //     { '_id': nQID }, 
+  //     { 'comments':  question.comments + 1},
+  //     function (err, numAffected) {}
+  //   );
       
-   });
+  //  });
 
+  Question.update(
+    { '_id': nQID }, 
+    { 'comments':  commentsCount(nQID)},
+    function (err, numAffected) {}
+  );
       
   c.save(function(err){
     console.log(err);
@@ -150,6 +155,18 @@ app.get('/single-question/comments', function(req, res){
    });
 
 });
+
+function commentsCount(_id) {
+   var ret = db.counters.findAndModify(
+          {
+            query: { _id: _id },
+            update: { $inc: { seq: 1 } },
+            new: true
+          }
+   );
+
+   return ret.seq;
+}
 
 
 app.get('/*', function(req, res) {
