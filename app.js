@@ -70,6 +70,21 @@ app.get('/questions', function(req, res){
 
 });
 
+app.get('/single-question', function(req, res){
+//    var questions = [
+//      {id: 1, title: 'What is up?'},
+//      {id: 2, title: 'Is it fun?'},
+//      {id: 3, title: 'Hello'}
+//    ];
+//    res.send(questions);
+
+   Question.find({'_id':req.query.id}, 'text yes no comments', function(err, question){
+      if(err) return handleError(err);
+      res.send(question);
+   });
+
+});
+
 app.post('/new-question', function(req, res){
   qText = req.body.text;
   qLoc = req.body.location;
