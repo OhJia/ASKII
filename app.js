@@ -134,16 +134,16 @@ app.post('/single-question/new-comment', function(req, res){
       
   //  });
 
-  Question.update(
-    { '_id': nQID }, 
-    { 'comments':  commentsCount(nQID)},
-    function (err, numAffected) {}
-  );
+  // Question.update(
+  //   { '_id': nQID }, 
+  //   { 'comments':  commentsCount(nQID)},
+  //   function (err, numAffected) {}
+  // );
 
   Question.findAndModify({
-    query: { _id: nQID },
+    query: { '_id': nQID },
     update: { $inc: { comments: 1 } },
-    new: true
+    //new: true
   });
       
   c.save(function(err){
