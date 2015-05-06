@@ -111,6 +111,7 @@ app.post('/new-question', function(req, res){
 
 //***************** COMMENT STUFF ***************************//
 
+// add new comment
 app.post('/single-question/new-comment', function(req, res){
   nComm = req.body.comment;
   nQID = req.body.q_id;
@@ -120,12 +121,27 @@ app.post('/single-question/new-comment', function(req, res){
     q_id: nQID,
   });
 
+  // get question, find the comments.
+  // comments + 1
+  Question.find({'_id':nQID}, 'comments', function(err, question){
+    if(err) return handleError(err);
+
+    Question.update(
+      { '_id': nQID }, 
+      { $set: { 
+          '$.comments':  question.comments + 1
+      }}, function (err, numAffected) {}
+    );
+      
+   });
+
   c.save(function(err){
     console.log(err);
     res.send(c);
   });
 });
 
+// get all comments for a question
 app.get('/single-question/comments', function(req, res){
 
    Comment.find({'q_id': req.query.q_id}, 'comment', function(err, comments){
