@@ -55,13 +55,18 @@ app.use(bodyParser.urlencoded({
 
 app.set('port', process.env.PORT || 3000);
 
-app.get('/questions', function(req, res){
-   var questions = [
-     {id: 1, title: 'What is up?'},
-     {id: 2, title: 'Is it fun?'},
-     {id: 3, title: 'Hello'}
-   ];
-   res.send(questions);
+// app.get('/questions', function(req, res){
+//    var questions = [
+//      {id: 1, title: 'What is up?'},
+//      {id: 2, title: 'Is it fun?'},
+//      {id: 3, title: 'Hello'}
+//    ];
+//    res.send(questions);
+
+   Question.findOne('text', function (err, question) {
+      if (err) return handleError(err);
+      console.log('%s %s is a %s.', question.text, question.yes, question.no) // Space Ghost is a talk show host.
+    });
 
    ////////////// show questions from mongoDB
    // questions.find()
