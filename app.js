@@ -63,7 +63,7 @@ app.get('/questions', function(req, res){
 //    ];
 //    res.send(questions);
 
-   Question.find({}, 'text yes no', function(err, questions){
+   Question.find({}, 'text yes no comments', function(err, questions){
       if(err) return handleError(err);
       res.send(questions);
    });
